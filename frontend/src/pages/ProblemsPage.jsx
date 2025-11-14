@@ -1,21 +1,17 @@
 import { Link } from "react-router";
 import Navbar from "../components/Navbar";
+
 import { PROBLEMS } from "../data/problems";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
-import { getDifficutlyBadgeClass } from "../lib/utils";
+import { getDifficultyBadgeClass } from "../lib/utils";
 
 function ProblemsPage() {
   const problems = Object.values(PROBLEMS);
 
-  const easyProblemsCount = problems.filter(
-    (p) => p.difficulty === "Easy"
-  ).length;
-  const mediumProblemsCount = problems.filter(
-    (p) => p.difficulty === "Medium"
-  ).length;
-  const hardProblemsCount = problems.filter(
-    (p) => p.difficulty === "Hard"
-  ).length;
+  const easyProblemsCount = problems.filter((p) => p.difficulty === "Easy").length;
+  const mediumProblemsCount = problems.filter((p) => p.difficulty === "Medium").length;
+  const hardProblemsCount = problems.filter((p) => p.difficulty === "Hard").length;
+
   return (
     <div className="min-h-screen bg-base-200">
       <Navbar />
@@ -23,13 +19,13 @@ function ProblemsPage() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* HEADER */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Pratice Problems</h1>
+          <h1 className="text-4xl font-bold mb-2">Practice Problems</h1>
           <p className="text-base-content/70">
             Sharpen your coding skills with these curated problems
           </p>
         </div>
 
-        {/* PROBLEM LIST */}
+        {/* PROBLEMS LIST */}
         <div className="space-y-4">
           {problems.map((problem) => (
             <Link
@@ -48,22 +44,14 @@ function ProblemsPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <h2 className="text-xl font-bold">{problem.title}</h2>
-                          <span
-                            className={`badge ${getDifficutlyBadgeClass(
-                              problem.difficulty
-                            )}`}
-                          >
+                          <span className={`badge ${getDifficultyBadgeClass(problem.difficulty)}`}>
                             {problem.difficulty}
                           </span>
                         </div>
-                        <p className="text-sm text-base-content/60">
-                          {problem.category}
-                        </p>
+                        <p className="text-sm text-base-content/60"> {problem.category}</p>
                       </div>
                     </div>
-                    <p className="text-base-content/80 mb-3">
-                      {problem.description.text}
-                    </p>
+                    <p className="text-base-content/80 mb-3">{problem.description.text}</p>
                   </div>
                   {/* RIGHT SIDE */}
 
@@ -88,18 +76,12 @@ function ProblemsPage() {
 
               <div className="stat">
                 <div className="stat-title">Easy</div>
-                <div className="stat-value text-success">
-                  {easyProblemsCount}
-                </div>
+                <div className="stat-value text-success">{easyProblemsCount}</div>
               </div>
-
               <div className="stat">
                 <div className="stat-title">Medium</div>
-                <div className="stat-value text-warning">
-                  {mediumProblemsCount}
-                </div>
+                <div className="stat-value text-warning">{mediumProblemsCount}</div>
               </div>
-
               <div className="stat">
                 <div className="stat-title">Hard</div>
                 <div className="stat-value text-error">{hardProblemsCount}</div>
@@ -111,5 +93,4 @@ function ProblemsPage() {
     </div>
   );
 }
-
 export default ProblemsPage;
