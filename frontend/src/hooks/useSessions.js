@@ -6,10 +6,10 @@ export const useCreateSession = () => {
   const result = useMutation({
     mutationKey: ["createSession"],
     mutationFn: sessionApi.createSession,
-    onSuccess: () => toast.success("session created successfully!"),
-    onError: (error) =>
-      toast.error(error.response?.data?.message || "Failed to create room"),
+    onSuccess: () => toast.success("Session created successfully!"),
+    onError: (error) => toast.error(error.response?.data?.message || "Failed to create room"),
   });
+
   return result;
 };
 
@@ -18,6 +18,7 @@ export const useActiveSessions = () => {
     queryKey: ["activeSessions"],
     queryFn: sessionApi.getActiveSessions,
   });
+
   return result;
 };
 
@@ -26,6 +27,7 @@ export const useMyRecentSessions = () => {
     queryKey: ["myRecentSessions"],
     queryFn: sessionApi.getMyRecentSessions,
   });
+
   return result;
 };
 
@@ -36,27 +38,28 @@ export const useSessionById = (id) => {
     enabled: !!id,
     refetchInterval: 5000, // refetch every 5 seconds to detect session status changes
   });
+
   return result;
 };
 
-export const useJoinSession = (id) => {
+export const useJoinSession = () => {
   const result = useMutation({
     mutationKey: ["joinSession"],
-    mutationFn: () => sessionApi.joinSession(id),
+    mutationFn: sessionApi.joinSession,
     onSuccess: () => toast.success("Joined session successfully!"),
-    onError: (error) =>
-      toast.error(error.response?.data?.message || "Failed to join session"),
+    onError: (error) => toast.error(error.response?.data?.message || "Failed to join session"),
   });
+
   return result;
 };
 
-export const useEndSession = (id) => {
+export const useEndSession = () => {
   const result = useMutation({
     mutationKey: ["endSession"],
-    mutationFn: () => sessionApi.endSession(id),
+    mutationFn: sessionApi.endSession,
     onSuccess: () => toast.success("Session ended successfully!"),
-    onError: (error) =>
-      toast.error(error.response?.data?.message || "Failed to join session"),
+    onError: (error) => toast.error(error.response?.data?.message || "Failed to end session"),
   });
+
   return result;
 };
